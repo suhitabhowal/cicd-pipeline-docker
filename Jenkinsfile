@@ -17,7 +17,7 @@ pipeline {
                                    
             steps {
                 script {
-                    app = docker.build("DockerHub_ID/node-app")
+                    app = docker.build("dockerhub/node-app")
                     app.inside {
                         sh 'echo $(curl localhost:8081)'
                     }
