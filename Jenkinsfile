@@ -15,7 +15,7 @@ Stages{
 		}
 		steps{
 		        script{
-				app=docker.build(“Dockerhub_ID node-app”)
+				app=docker.build(“Dockerhub_ID/node-app”)
 				app.inside{
 					     sh 'echo $(curl localhost:8080)'
 					}
