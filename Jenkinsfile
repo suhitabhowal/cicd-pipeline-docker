@@ -31,7 +31,7 @@ Stages{
 				script{
 					docker.withRegistry('https://registry.hub.docker.com','Dockerhub_ID')
 		{
-		app.push(“${env.BUILD_NUMBER}”)
+		  app.push("${env.BUILD_NUMBER}")
 		app.push(“latest”)
 				      }
 				}
