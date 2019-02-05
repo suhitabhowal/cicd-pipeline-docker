@@ -27,7 +27,9 @@ pipeline {
         }
         
         stage('Push docker image'){
-           
+           when{
+			branch 'master'
+			}
             steps{
                 script {
                     docker.withRegistry('https://registry.hub.docker.com','Dockerhub_ID'){
