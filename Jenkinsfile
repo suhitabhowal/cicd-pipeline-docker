@@ -17,7 +17,7 @@ pipeline {
                                    
             steps {
                 script {
-                    app = docker.build("Dockerhub_ID/node-app")
+                    app = docker.build("DockerHub_ID/node-app")
                     app.inside {
                         sh 'echo $(curl localhost:8081)'
                     }
@@ -32,7 +32,7 @@ pipeline {
 			}*/
             steps{
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com','Dockerhub_ID'){
+                    docker.withRegistry('https://registry.hub.docker.com','DockerHub_ID'){
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
