@@ -1,47 +1,40 @@
-pipeline{
-	agent any
-Stages{
-	stage ('Build'){
-		steps{
-			echo 'Running build automation'|
-			sh '/gradlew build –no-daemon'
-			archiveArtifacts: 'dist/trainSchedule.zip'
-			}
-			}
-
-	stage('BuildDocker Image'){
-		when{
-			branch 'master'
-		}
-		steps{
-		        script{
-				app=docker.build(“Dockerhub_ID/node-app”)
-				app.inside{
-					     sh 'echo $(curl localhost:8080)'
-					}
-				}
-			}
-		}
-
-	stage('Push Docker Image'){
-		when{
-			branch 'master'
-			}
-			steps{
-				script{
-					docker.withRegistry('https://registry.hub.docker.com','Dockerhub_ID')
-		{
-		  app.push("${env.BUILD_NUMBER}")
-		app.push(“latest”)
-				      }
-				}
-			}
-
-			}
-
-			
-
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Running build automationsssssssssssss'
+                sh './gradlew build --no-daemon'
+                archiveArtifacts artifacts: 'dist/trainSchedule.zip'
+            }
+        }
+        
+        stage('Build Docker image'){
+                       
+            steps {
+                script {
+                    app = docker.build("Dockerhub_ID/node-app")
+                    app.inside {
+                        sh 'echo $(curl localhost:8081)'
+                    }
+                }
+            }
+            
+        }
+        
+        stage('Push docker image'){
+           
+            steps{
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com','docker_hub_login'){
+                        app.push("${env.BUILD_NUMBER}")
+                        app.push("latest")
+                    }
+                }
+            }
+        }
+        
+    }
 }
-}
-
 
