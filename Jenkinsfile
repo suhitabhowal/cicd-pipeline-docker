@@ -10,10 +10,7 @@ pipeline {
         }
         
         stage('Build Docker image'){
-            when{
-			branch 'master'
-		}
-                       
+                                   
             steps {
                 script {
                     app = docker.build("Dockerhub_ID/node-app")
