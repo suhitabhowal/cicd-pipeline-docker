@@ -11,9 +11,9 @@ pipeline {
         
         stage('Build Docker image'){
             
-            when{
+           /* when{
 			branch 'master'
-		}
+		}*/
                                    
             steps {
                 script {
@@ -27,9 +27,9 @@ pipeline {
         }
         
         stage('Push docker image'){
-           when{
+           /*when{
 			branch 'master'
-			}
+			}*/
             steps{
                 script {
                     docker.withRegistry('https://registry.hub.docker.com','Dockerhub_ID'){
